@@ -1,7 +1,6 @@
 module Varint where
 import Data.Char (digitToInt)
 
-
 toBinary :: Int -> [Char]
 toBinary 0 = []
 toBinary n = toBinary (n `quot` 2) ++ show (n `mod` 2)
