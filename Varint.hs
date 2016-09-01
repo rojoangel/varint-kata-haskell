@@ -1,4 +1,6 @@
 module Varint where
+import Data.Char (digitToInt)
+
 
 toBinary :: Int -> [Char]
 toBinary 0 = []
@@ -31,6 +33,10 @@ toVarint i = format (toBase128Binary i)
 
 unformat :: [Char] -> [Char]
 unformat xs = filter (\x -> x `elem` "01") xs
+
+dropMostSignificantBits :: [Char] -> [Char]
+dropMostSignificantBits [] = []
+dropMostSignificantBits xs = let (first8B, lastB) = splitAt 8 xs in drop 1 first8B ++ dropMostSignificantBits lastB
 
 fromVarint :: String -> Int
 fromVarint _ = 0
