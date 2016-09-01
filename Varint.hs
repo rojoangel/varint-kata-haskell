@@ -38,5 +38,8 @@ dropMostSignificantBits :: [Char] -> [Char]
 dropMostSignificantBits [] = []
 dropMostSignificantBits xs = let (first8B, lastB) = splitAt 8 xs in drop 1 first8B ++ dropMostSignificantBits lastB
 
+fromBinary :: [Char] -> Int
+fromBinary xs = sum (zipWith (\ x y -> digitToInt x * y) xs [ 2^y| y <- [length xs - 1 , length xs -2 .. 0]])
+
 fromVarint :: String -> Int
 fromVarint _ = 0
