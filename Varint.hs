@@ -26,5 +26,11 @@ format xs = init (format' xs)
 toBase128Binary :: Int -> [Char]
 toBase128Binary x = addMostSignificantBits(reverse7BitGroups (topUpArray (toBinary x)))
 
-varint :: Int -> String
-varint i = format (toBase128Binary i)
+toVarint :: Int -> String
+toVarint i = format (toBase128Binary i)
+
+unformat :: [Char] -> [Char]
+unformat xs = filter (\x -> x `elem` "01") xs
+
+fromVarint :: String -> Int
+fromVarint _ = 0
