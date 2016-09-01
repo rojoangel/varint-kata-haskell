@@ -42,4 +42,4 @@ fromBinary :: [Char] -> Int
 fromBinary xs = sum (zipWith (\ x y -> digitToInt x * y) xs [ 2^y| y <- [length xs - 1 , length xs -2 .. 0]])
 
 fromVarint :: String -> Int
-fromVarint _ = 0
+fromVarint xs = fromBinary(reverse7BitGroups(dropMostSignificantBits(unformat xs)))
